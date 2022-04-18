@@ -13,10 +13,10 @@ conn = mysql.connector.connect(
     host="obsvrm05",
     db="mysql",
     port="3306"
+
 )
 
 cur = conn.cursor()
-
 today_data = datetime.date.today()
 today_year = today_data.year
 last_year = today_year - 1
@@ -28,6 +28,7 @@ SELECT issues.id,issues.start_date,issues.subject,issues.status_id,custom_values
             INNER JOIN issues ON custom_values.customized_id = issues.id where issues.tracker_id = 37 and 
             issues.start_date >= %s and custom_values.custom_field_id  = '47'
             """
+
 cur.execute(sql, (datetime.date(last_year, 4, 1),))
 
 rows2 = cur.fetchall()
